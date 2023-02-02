@@ -231,6 +231,12 @@ public class MihayouService {
                 //备用方案
                 account_id = HttpUtils.getCookieByName(autoMihayou.getCookie(), "ltuid");
             }
+            if (StringUtils.isBlank(account_id)) {
+                account_id = HttpUtils.getCookieByName(autoMihayou.getCookie(), "account_id_v2");
+            }
+            if (StringUtils.isBlank(cookie_token)) {
+                cookie_token = HttpUtils.getCookieByName(autoMihayou.getCookie(), "cookie_token_v2");
+            }
             if (!StringUtils.isBlank(lcookie)) {
                 //校验两个cookie字段
                 String login_uid = HttpUtils.getCookieByName(lcookie, "login_uid");

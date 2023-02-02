@@ -46,6 +46,11 @@ public class ServerChanTurboPush extends AbstractPush {
 
     @Override
     protected String generatePushBody(PushMetaInfo metaInfo, String content) {
-        return "title=Oldwu-HELPER任务简报&desp=" + content.replaceAll("=", ":");
+//        return "title=Oldwu-HELPER任务简报&desp=" + content.replaceAll("=", ":");
+        JSONObject body = new JSONObject();
+        body.put("title", "Oldwu-HELPER任务简报");
+        content = content.replaceAll("\\n", "\n\n");
+        body.put("desp", content);
+        return body.toJSONString();
     }
 }

@@ -1,27 +1,29 @@
 package com.example.demo;
 
+import org.jasypt.encryption.StringEncryptor;
+import org.jasypt.util.text.BasicTextEncryptor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
+import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
 @SpringBootTest
+@ActiveProfiles("dev")
 public class AutoPlanApplicationTests {
-
-    public static void main(String[] args) {
-        Date date = new Date();
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println(simpleDateFormat.format(date));
-    }
+    @Resource
+    private StringEncryptor stringEncryptor;
 
     @Test
     void test() {
-        Random random = new Random();
-        int i = random.nextInt(200000 - 100000) + 100000 + 1;
-        System.out.println(i);
+        // 要加密的数据（如数据库的用户名或密码）
+        String username = stringEncryptor.encrypt("123456");
+        String password = stringEncryptor.encrypt("12345678");
+        System.out.println(username);
+        System.out.println(password);
     }
 
     /**

@@ -8,7 +8,7 @@ services:
       #数据库账号
       - db_username=root
       #数据库密码
-      - db_password=789376152
+      - db_password=root
       #数据库地址
       - db_host=192.168.2.1
       #数据库名称

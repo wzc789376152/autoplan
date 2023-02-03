@@ -28,7 +28,7 @@ public class MiHuYouTask {
     private final Log logger = LogFactory.getLog(MiHuYouTask.class);
 
     @Autowired
-    public void getMihuyouService(MihayouService service){
+    public void getMihuyouService(MihayouService service) {
         MiHuYouTask.mihayouService = service;
     }
 
@@ -45,7 +45,7 @@ public class MiHuYouTask {
     /**
      * 用于每日0点重置状态
      */
-    public void resetStatus(){
+    public void resetStatus() {
         //重置自动任务的标识
         List<AutoMihayou> autoMihayous = mihayouDao.selectList(new QueryWrapper<>());
         for (AutoMihayou autoMihayou : autoMihayous) {
@@ -60,10 +60,10 @@ public class MiHuYouTask {
     /**
      * 更新头像逻辑，因为数据量可能比较大，所以不用每天调用
      */
-    public void updateAvatar(){
+    public void updateAvatar() {
         List<AutoMihayou> autoMihayous = mihayouDao.selectList(new QueryWrapper<>());
         for (AutoMihayou mihayous : autoMihayous) {
-            mihayouService.setPersonInfo(mihayous.getId(),mihayous.getCookie());
+            mihayouService.setPersonInfo(mihayous.getId(), mihayous.getCookie());
         }
     }
 
@@ -81,7 +81,7 @@ public class MiHuYouTask {
 
             //任务未开启，下一个
             if (!Boolean.parseBoolean(autoMihayou.getEnable())) {
-                AutoMihayou autoMihayou1 = new AutoMihayou(autoId,"0",new Date());
+                AutoMihayou autoMihayou1 = new AutoMihayou(autoId, "0", new Date());
                 mihayouDao.updateById(autoMihayou1);
                 continue;
             }
@@ -92,15 +92,16 @@ public class MiHuYouTask {
 
     /**
      * 米忽悠定时签到任务 执行部分
-     * @param autoId id
-     * @param userid userId
+     *
+     * @param autoId      id
+     * @param userid      userId
      * @param autoMihayou autoMihayou
      */
-    public void runTask(Integer autoId, Integer userid, AutoMihayou autoMihayou){
-        int reconnect = 1;//最大重试次数
+    public void runTask(Integer autoId, Integer userid, AutoMihayou autoMihayou) {
+        int reconnect = 3;//最大重试次数
 
         //更新任务状态
-        AutoMihayou autoMihayou1 = new AutoMihayou(autoId,"1",null);
+        AutoMihayou autoMihayou1 = new AutoMihayou(autoId, "1", null);
         mihayouDao.updateById(autoMihayou1);
 
         //执行任务
@@ -129,11 +130,11 @@ public class MiHuYouTask {
                     break;
                 } else {
                     //任务成功完成
-                    msg.append("\n").append(maprun.get("msg")).append("\n-----------------\n").append("[SUCCESS] 任务全部正常完成，进程退出");
+                    msg.append(maprun.get("msg")).append("\n-----------------\n").append("[SUCCESS] 任务全部正常完成，进程退出");
                     autoMihayou1.setStatus("200");
                     break;
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 logger.error("！米游社任务运行出错" + e.getMessage());
                 msg.append("！米游社任务运行出错：").append(e.getMessage());
                 autoMihayou1.setStatus("-1");

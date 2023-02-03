@@ -8,8 +8,10 @@ services:
       #数据库账号
       - db_username=root
       #数据库密码
-      - db_password=root
+      - db_password=789376152
       #数据库地址
-      - db_host=127.0.0.1
+      - db_host=192.168.2.1
       #数据库名称
       - db_database=aotuplan
+    restart: always
+

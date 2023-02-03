@@ -12,5 +12,4 @@ public class AutoPlanApplication {
     public static void main(String[] args) {
         SpringApplication.run(AutoPlanApplication.class, args);
     }
-
 }

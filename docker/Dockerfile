@@ -1,4 +1,5 @@
-FROM adoptopenjdk/openjdk8:ubi
+FROM houwm/jdk8:arm64
+#arm架构使用 houwm/jdk8:arm64
 #RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list
 #RUN sed -i "s/deb.debian.org/mirrors.aliyun.com/g" /etc/apt/sources.list
 #RUN sed -i "s/security.debian.org/mirrors.aliyun.com\/debian-security/g" /etc/apt/sources.list

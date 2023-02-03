@@ -2,6 +2,6 @@ spring:
   #数据库连接配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://yangmh.top:3306/autoplan?characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://www.yangmh.top:3306/autoplan?characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: ENC(ATDeSIYtPzd2g5UUPdM9DgyUK1j40jDzoP/lvdNnISuurWeO33wDlFzME79Pcnby)
     password: ENC(rT0L/b0CV2AFluUeAPEsfM8gt/OoQhWRnK4lraTFFQineWaZTrxfI6t68n3FvjlZ)

@@ -200,6 +200,18 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.2</version>
+                <configuration>
+                    <imageName>registry.cn-shenzhen.aliyuncs.com/yangmh/autoplan</imageName>
+                    <imageTags>
+                        <imageTag>v1.0</imageTag>
+                    </imageTags>
+                    <dockerDirectory>docker</dockerDirectory>
+                </configuration>
+            </plugin>
         </plugins>
         <finalName>auto_plan</finalName>
     </build>

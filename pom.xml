@@ -205,11 +205,15 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>1.2.2</version>
                 <configuration>
-                    <imageName>registry.cn-shenzhen.aliyuncs.com/yangmh/autoplan</imageName>
-                    <imageTags>
-                        <imageTag>v1.0</imageTag>
-                    </imageTags>
+                    <imageName>registry.cn-shenzhen.aliyuncs.com/yangmh/autoplan:v1.0</imageName>
                     <dockerDirectory>docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
                 </configuration>
             </plugin>
         </plugins>

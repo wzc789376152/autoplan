@@ -67,7 +67,7 @@ public abstract class MiHoYoAbstractSign implements Sign {
         Random random = new Random();
         String i = (System.currentTimeMillis() / 1000) + "";
         String r = String.valueOf(random.nextInt(200000 - 100000) + 100000 + 1);
-        return createDS(MihayouConstants.COMMUNITY_SIGN_SALT, i, r, gidsJson);
+        return createDS(MihayouConstants.COMMUNITY_SIGN_SALT, i, r);
     }
 
     private String createDS(String n, String i, String r) {

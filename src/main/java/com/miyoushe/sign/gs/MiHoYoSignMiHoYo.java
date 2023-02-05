@@ -179,7 +179,7 @@ public class MiHoYoSignMiHoYo extends MiHoYoAbstractSign {
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("gids", hub.getForumId());
 
-        JSONObject signResult = HttpUtils.doPost(MiHoYoConfig.HUB_SIGN_URL, getHeaders(MihayouConstants.DS_TYPE_ONE), data);
+        JSONObject signResult = HttpUtils.doGet(String.format(MiHoYoConfig.HUB_SIGN_URL,hub.getForumId()), getHeaders(MihayouConstants.DS_TYPE_ONE));
         if ("OK".equals(signResult.get("message")) || "重复".equals(signResult.get("message"))) {
             log.info("{}", signResult.get("message"));
             return "社区签到: " + signResult.get("message");

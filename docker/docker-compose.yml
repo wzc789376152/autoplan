@@ -2,14 +2,14 @@ version: '3'
 services:
   autoplan:
     container_name: autoplan
-    image: registry.cn-shenzhen.aliyuncs.com/yangmh/autoplan:v1.0-arm
+    image: registry.cn-shenzhen.aliyuncs.com/yangmh/autoplan:v1.1
     environment:
       #数据库账号
       - db_username=root
       #数据库密码
-      - db_password=789376152
+      - db_password=root
       #数据库地址
-      - db_host=192.168.2.1
+      - db_host=127.0.0.1
       #数据库名称
       - db_database=autoplan
     networks:

@@ -6,7 +6,7 @@ FROM houwm/jdk8:arm64
 #RUN sed -i "s/security.debian.org/mirrors.aliyun.com\/debian-security/g" /etc/apt/sources.list
 #RUN sed -i "s/httpredir.debian.org/mirrors.aliyun.com\/debian-security/g" /etc/apt/sources.list
 VOLUME /tmp
-ADD ../auto_plan.jar /auto_plan.jar
+ADD auto_plan.jar /auto_plan.jar
 ENV db_username=""
 ENV db_password=""
 ENV db_host=""

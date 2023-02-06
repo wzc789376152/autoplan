@@ -92,7 +92,7 @@ public class GenShinSignMiHoYo extends MiHoYoAbstractSign {
             result = "原神签到福利签到失败：" + signResult.get("message");
         }
         log.info(result);
-        return "原神签到福利签到失败：" + signResult.get("message");
+        return result;
     }
 
     /**

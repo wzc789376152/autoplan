@@ -205,7 +205,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>1.2.2</version>
                 <configuration>
-                    <imageName>registry.cn-shenzhen.aliyuncs.com/yangmh/autoplan:v1.2</imageName>
+                    <imageName>registry.cn-shenzhen.aliyuncs.com/yangmh/autoplan:v1.3</imageName>
                     <dockerDirectory>docker</dockerDirectory>
                     <resources>
                         <resource>

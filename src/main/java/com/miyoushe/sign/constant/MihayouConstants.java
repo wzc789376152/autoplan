@@ -29,8 +29,8 @@ public class MihayouConstants {
     /**
      * 社区签到Salt
      */
-//    public static final String COMMUNITY_SIGN_SALT = "t0qEgfub6cvueAPgR5m9aQWWVciEer7v";
-    public static final String COMMUNITY_SIGN_SALT = "ZSHlXeQUBis52qD1kEgKt5lUYed4b7Bb";
+    public static final String COMMUNITY_SIGN_SALT = "t0qEgfub6cvueAPgR5m9aQWWVciEer7v";
+//    public static final String COMMUNITY_SIGN_SALT = "ZSHlXeQUBis52qD1kEgKt5lUYed4b7Bb";
     /**
      * 社区Salt
      */

@@ -52,8 +52,8 @@ public class DailyTask implements Runnable {
         doDailyTask();
     }
 
-    public Map<String,Object> doDailyTask() {
-        Map<String,Object> result = new HashMap<>();
+    public Map<String, Object> doDailyTask() {
+        Map<String, Object> result = new HashMap<>();
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -67,9 +67,9 @@ public class DailyTask implements Runnable {
             List<Map<String, Object>> list = genShinSign.doSign();
 
             for (Map<String, Object> map : list) {
-                if (!(boolean) map.get("flag")){
+                if (!(boolean) map.get("flag")) {
                     //登录失败，直接返回
-                    map.put("msg",stringBuilder.toString() + "\n" + map.get("msg"));
+                    map.put("msg", stringBuilder.toString() + "\n" + map.get("msg"));
                     return map;
                 }
 
@@ -77,15 +77,15 @@ public class DailyTask implements Runnable {
             }
         }
 
-        if (miHoYoSign != null) {
-            try {
-                Map<String, Object> map = miHoYoSign.doSingleThreadSign();
-                stringBuilder.append("\n").append("-----------------\n").append(map.get("msg"));
-            } catch (Exception e) {
-                stringBuilder.append("\n").append("[ERROR]miHoYoThreadSign执行异常！").append(e.getMessage());
-                e.printStackTrace();
-            }
-        }
+//        if (miHoYoSign != null) {
+//            try {
+//                Map<String, Object> map = miHoYoSign.doSingleThreadSign();
+//                stringBuilder.append("\n").append("-----------------\n").append(map.get("msg"));
+//            } catch (Exception e) {
+//                stringBuilder.append("\n").append("[ERROR]miHoYoThreadSign执行异常！").append(e.getMessage());
+//                e.printStackTrace();
+//            }
+//        }
         if (miHoYoSign != null) {
             try {
                 List<Map<String, Object>> list = miHoYoSign.doSign();
@@ -97,8 +97,8 @@ public class DailyTask implements Runnable {
                 e.printStackTrace();
             }
         }
-        result.put("msg",stringBuilder.toString());
-        result.put("flag",true);
+        result.put("msg", stringBuilder.toString());
+        result.put("flag", true);
         return result;
 //        if (pushed && messagePush != null) {
 //

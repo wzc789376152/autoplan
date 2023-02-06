@@ -7,6 +7,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.miyoushe.sign.constant.MihayouConstants;
 import com.miyoushe.sign.gs.pojo.Award;
 import com.miyoushe.util.HttpUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -47,8 +48,17 @@ public class GenShinSignMiHoYo extends MiHoYoAbstractSign {
             }
 
             String doSign = doSign((String) uidMap.get("uid"), (String) uidMap.get("region"));
-
+            try {
+                Thread.sleep(RandomUtils.nextLong(5000, 8000));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             String hubSign = hubSign((String) uidMap.get("uid"), (String) uidMap.get("region"));
+            try {
+                Thread.sleep(RandomUtils.nextLong(5000, 8000));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             uidMap.put("msg", uidMap.get("msg") + "\n" + doSign + "\n" + hubSign);
             continue;
         }
@@ -57,7 +67,8 @@ public class GenShinSignMiHoYo extends MiHoYoAbstractSign {
 
     /**
      * 签到（重载doSign,主要用来本地测试）
-     * @param uid 游戏角色uid
+     *
+     * @param uid    游戏角色uid
      * @param region 游戏服务器标识符
      * @return 签到信息
      */
@@ -70,14 +81,18 @@ public class GenShinSignMiHoYo extends MiHoYoAbstractSign {
         data.put("uid", uid);
 
         JSONObject signResult = HttpUtils.doPost(MiHoYoConfig.SIGN_URL, getHeaders(""), data);
-
+        String result = "";
         if (signResult.getInteger("retcode") == 0) {
-            log.info("原神签到福利成功：{}", signResult.get("message"));
-            return "原神签到福利成功：" + signResult.get("message");
+            if (signResult.getJSONObject("data").getInteger("success") == 1) {
+                result = "原神签到福利签到失败：触发验证码";
+            } else {
+                result = "原神签到福利成功：" + signResult.get("message");
+            }
         } else {
-            log.info("原神签到福利签到失败：{}", signResult.get("message"));
-            return "原神签到福利签到失败：" + signResult.get("message");
+            result = "原神签到福利签到失败：" + signResult.get("message");
         }
+        log.info(result);
+        return "原神签到福利签到失败：" + signResult.get("message");
     }
 
     /**
@@ -149,13 +164,15 @@ public class GenShinSignMiHoYo extends MiHoYoAbstractSign {
         JSONObject awardResult = HttpUtils.doGet(MiHoYoConfig.AWARD_URL, getHeaders(""));
         JSONArray jsonArray = awardResult.getJSONObject("data").getJSONArray("awards");
 
-        List<Award> awards = JSON.parseObject(JSON.toJSONString(jsonArray), new TypeReference<List<Award>>() {});
+        List<Award> awards = JSON.parseObject(JSON.toJSONString(jsonArray), new TypeReference<List<Award>>() {
+        });
         return awards.get(day - 1);
     }
 
     /**
      * 社区签到并查询当天奖励
-     * @param uid 游戏角色uid
+     *
+     * @param uid    游戏角色uid
      * @param region 游戏服务器标识符
      * @return 签到信息
      */
@@ -167,7 +184,7 @@ public class GenShinSignMiHoYo extends MiHoYoAbstractSign {
         data.put("uid", uid);
 
         JSONObject signInfoResult = HttpUtils.doGet(MiHoYoConfig.INFO_URL, getHeaders(""), data);
-        if (signInfoResult == null || signInfoResult.getJSONObject("data") == null){
+        if (signInfoResult == null || signInfoResult.getJSONObject("data") == null) {
             return null;
         }
 

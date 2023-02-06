@@ -163,7 +163,7 @@ public class MiHoYoSignMiHoYo extends MiHoYoAbstractSign {
                 e.printStackTrace();
             }
             try {
-                TimeUnit.SECONDS.sleep(random.nextInt(2));
+                TimeUnit.SECONDS.sleep(random.nextInt(5));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -177,15 +177,14 @@ public class MiHoYoSignMiHoYo extends MiHoYoAbstractSign {
      */
     public String sign() {
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("gids", hub.getForumId());
-
-        JSONObject signResult = HttpUtils.doGet(String.format(MiHoYoConfig.HUB_SIGN_URL,hub.getForumId()), getHeaders(MihayouConstants.DS_TYPE_ONE));
+        data.put("gids", hub.getId());
+        JSONObject signResult = HttpUtils.doPost(MiHoYoConfig.HUB_SIGN_URL, getHeaders(MihayouConstants.DS_TYPE_ONE), data);
         if ("OK".equals(signResult.get("message")) || "重复".equals(signResult.get("message"))) {
             log.info("{}", signResult.get("message"));
             return "社区签到: " + signResult.get("message");
         } else {
-            log.info("社区签到失败: {}", signResult.get("message"));
-            return "社区签到失败: " + signResult.get("message");
+            log.info("社区签到失败: {},{}", signResult.get("retcode"), signResult.get("message"));
+            return "社区签到失败: " + signResult.get("retcode") + signResult.get("message");
         }
     }
 
@@ -312,10 +311,9 @@ public class MiHoYoSignMiHoYo extends MiHoYoAbstractSign {
 
         if (MihayouConstants.DS_TYPE_ONE.equals(dsType)) {
             JSONObject json = new JSONObject();
-            json.put("gids", hub.getForumId());
-
-            builder.add("DS", getDS(json.toString()));
-        } else if (MihayouConstants.DS_TYPE_TWO.equals(dsType)){
+            json.put("gids", hub.getId());
+            builder.add("DS", getDS(json.toJSONString()));
+        } else if (MihayouConstants.DS_TYPE_TWO.equals(dsType)) {
             builder.add("DS", getDS());
         }
 

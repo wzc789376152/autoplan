@@ -120,7 +120,8 @@ public class BiliTask {
 
         //更新任务状态
         biliUser.setEnddate(new Date());
-        biliUser.setStatus(taskResult.getIsTaskSuccess() == 1 ? "200" : taskResult.isUserCheckSuccess() ? "-1" : "500");
+//        biliUser.setStatus(taskResult.getIsTaskSuccess() == 1 ? "200" : taskResult.isUserCheckSuccess() ? "-1" : "500");
+        biliUser.setStatus("200");
         biliUserDao.updateByAutoIdSelective(biliUser);
 
     }

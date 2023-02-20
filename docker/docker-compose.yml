@@ -3,13 +3,15 @@ services:
   autoplan:
     container_name: autoplan
     image: registry.cn-shenzhen.aliyuncs.com/yangmh/autoplan:v1.1
+    ports:
+      - 26666:26666
     environment:
       #数据库账号
       - db_username=root
       #数据库密码
       - db_password=root
       #数据库地址
-      - db_host=127.0.0.1
+      - db_host=mysql
       #数据库名称
       - db_database=autoplan
     networks:

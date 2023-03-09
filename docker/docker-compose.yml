@@ -2,10 +2,9 @@ version: '3'
 services:
   autoplan:
     container_name: autoplan
-    image: registry.cn-shenzhen.aliyuncs.com/yangmh/autoplan:v1.1
-    ports:
-      - 26666:26666
+    image: registry.cn-shenzhen.aliyuncs.com/yangmh/autoplan:v1.6
     environment:
+      - PORT=8080
       #数据库账号
       - db_username=root
       #数据库密码
@@ -14,6 +13,7 @@ services:
       - db_host=mysql
       #数据库名称
       - db_database=autoplan
+      - JVM_OPTS=-Xmx256m -Xms512m -XX:MaxPermSize=128m
     networks:
       - apache-bridge
     restart: always

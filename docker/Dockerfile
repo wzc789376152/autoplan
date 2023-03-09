@@ -11,7 +11,5 @@ ENV db_username=""
 ENV db_password=""
 ENV db_host=""
 ENV db_database=""
-ENV XMS="256m"
-ENV XMX="512m"
 ENV PORT="8080"
-ENTRYPOINT ["java","-Xms$XMS","-Xmx$XMX","-Dfile.encoding=UTF-8","-Dsun.jnu.encoding=UTF-8","-Djava.security.egd=file:/dev/./urandom","-jar" ,"/auto_plan.jar","--server.port=$PORT","--spring.datasource.username=${db_username}","--spring.datasource.password=${db_password}","--spring.datasource.url=jdbc:mysql://${db_host}:3306/${db_database}?allowPublicKeyRetrieval=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai","--spring.profiles.active=prod"]
+ENTRYPOINT ["java","-Dfile.encoding=UTF-8","-Dsun.jnu.encoding=UTF-8","-Djava.security.egd=file:/dev/./urandom","-jar" ,"/auto_plan.jar","--server.port=$PORT","--spring.datasource.username=${db_username}","--spring.datasource.password=${db_password}","--spring.datasource.url=jdbc:mysql://${db_host}:3306/${db_database}?allowPublicKeyRetrieval=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai","--spring.profiles.active=prod"]
